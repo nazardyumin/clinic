@@ -21,24 +21,24 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        $list_names=array('Иванов Сергей Михайлович', 'Петрова Анна Павловна');
+        $list_names = array('Иванов Сергей Михайлович', 'Петрова Анна Павловна');
 
         for ($i = 1; $i <= 10; $i++) {
-            $male_photo='storage/images/doc_male.jpg';
-            $female_photo='storage/images/doc_female.jpg';
-            if($i%2==0){
-                $male_photo='storage/images/doc_male1.jpg';
-                $female_photo='storage/images/doc_female1.jpg';
+            $male_photo = 'storage/images/doc_male.jpg';
+            $female_photo = 'storage/images/doc_female.jpg';
+            if ($i % 2 == 0) {
+                $male_photo = 'storage/images/doc_male1.jpg';
+                $female_photo = 'storage/images/doc_female1.jpg';
             }
             Doctor::create([
-                'name'=>$list_names[0],
-                'photo'=>$male_photo,
-                'speciality_id'=>$i
+                'name' => $list_names[0],
+                'photo' => $male_photo,
+                'speciality_id' => $i
             ]);
             Doctor::create([
-                'name'=>$list_names[1],
-                'photo'=>$female_photo,
-                'speciality_id'=>$i
+                'name' => $list_names[1],
+                'photo' => $female_photo,
+                'speciality_id' => $i
             ]);
         }
     }

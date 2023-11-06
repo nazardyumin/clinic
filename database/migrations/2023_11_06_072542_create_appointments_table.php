@@ -2,7 +2,6 @@
 
 use App\Models\Appointment;
 use App\Models\Doctor;
-use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -23,15 +22,15 @@ return new class extends Migration
             $table->timestamps();
         });
         //$now = date("Y-m-d H:i:s");
-        $tomorrow_start = mktime(8, 0, 0, date("m")  , date("d")+1, date("Y"));
-        $tomorrow_end = mktime(14, 0, 0, date("m")  , date("d")+1, date("Y"));
-        $date1 = new DateTime(date("Y-m-d H:i:s",$tomorrow_start));
-        $date2 = new DateTime(date("Y-m-d H:i:s",$tomorrow_end));
+        $tomorrow_start = mktime(8, 0, 0, date("m"), date("d") + 1, date("Y"));
+        $tomorrow_end = mktime(14, 0, 0, date("m"), date("d") + 1, date("Y"));
+        $date1 = new DateTime(date("Y-m-d H:i:s", $tomorrow_start));
+        $date2 = new DateTime(date("Y-m-d H:i:s", $tomorrow_end));
 
-        for(; $date1<= $date2; $date1->modify('+20 minutes') ){
+        for (; $date1 <= $date2; $date1->modify('+20 minutes')) {
             Appointment::create([
-                'doctor_id'=>1,
-                'date'=>$date1
+                'doctor_id' => 1,
+                'date' => $date1
             ]);
         }
     }

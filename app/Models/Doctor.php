@@ -17,11 +17,13 @@ class Doctor extends Model
         'speciality_id'
     ];
 
-    public function speciality():HasOne {
+    public function speciality(): HasOne
+    {
         return $this->hasOne(Speciality::class);
     }
 
-    public function appointments():HasMany {
+    public function appointments(): HasMany
+    {
         return $this->hasMany(Appointment::class);
     }
 }
