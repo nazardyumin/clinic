@@ -25,5 +25,9 @@ Route::middleware("guest")->group(function(){
     Route::post('/register_new_user', [AuthController::class, 'register'])->name('register_new_user');
 });
 
+Route::get('/', function(){
+    return redirect(route('home'));
+});
+
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
 

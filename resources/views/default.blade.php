@@ -7,13 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-    <title>{{env('APP_NAME','Clinic')}}</title>
+    <title>{{env('APP_NAME','Клиника Долголетия')}}</title>
     <link rel="stylesheet" href="{{ asset('storage/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('storage/css/app.css') }}">
+    <link rel="icon" href="{{ asset('storage/images/icon.png') }}">
 </head>
 
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid-">
         <main>
             @yield('content')
         </main>

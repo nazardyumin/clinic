@@ -1,7 +1,7 @@
 @extends('default')
 
 @section('content')
-<a class="btn btn-link my-3" href="{{route('home')}}">На главную</a>
+<a class="btn btn-link my-3 mx-3" href="{{route('home')}}">На главную</a>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
