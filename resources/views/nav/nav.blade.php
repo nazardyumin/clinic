@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">О нас</a>
+                            <a class="nav-link" aria-current="page" href="#">О нас</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Специалисты</a>
@@ -24,7 +24,8 @@
                             <a class="nav-link" href="#">Отзывы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Записаться на прием</a>
+                            <a class="nav-link {{ request()->routeIs('appointments') ? 'active' : '' }}"
+                                href="{{ route('appointments') }}">Записаться на прием</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Администратор</a>
