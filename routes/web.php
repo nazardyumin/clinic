@@ -18,6 +18,8 @@ use App\Http\Controllers\AppointmentController;
 Route::middleware("auth")->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
+    Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
+    Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
 });
 
 Route::middleware("guest")->group(function () {

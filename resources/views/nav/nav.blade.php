@@ -4,7 +4,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-light bg-light">
             <div class="container-fluid mx-3">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{route('home')}}">
                     <img src="{{ asset('storage/images/logo.png') }}" alt="logo" height="50">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Doctor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->dateTime('date');
+            $table->unsignedBigInteger('date');
             $table->string('day_off_status')->nullable();
             $table->timestamps();
         });
@@ -30,7 +30,7 @@ return new class extends Migration
         for (; $date1 <= $date2; $date1->modify('+20 minutes')) {
             Appointment::create([
                 'doctor_id' => 1,
-                'date' => $date1
+                'date' => $date1->getTimestamp()
             ]);
         }
     }
