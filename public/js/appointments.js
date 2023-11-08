@@ -1,8 +1,8 @@
 $(document).ready(function () {
     function getDoctors(e) {
-        $('#DoctorsTimeTable').empty();
-        $('#AppointmentIdHelp').text('');
-        $('#TableHelp').text('');
+        $("#DoctorsTimeTable").empty();
+        $("#AppointmentIdHelp").text("");
+        $("#TableHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -46,9 +46,9 @@ $(document).ready(function () {
     }
 
     function getAppointments(e) {
-        $('#DoctorsTimeTable').empty();
-        $('#AppointmentIdHelp').text('');
-        $('#TableHelp').text('');
+        $("#DoctorsTimeTable").empty();
+        $("#AppointmentIdHelp").text("");
+        $("#TableHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -65,54 +65,63 @@ $(document).ready(function () {
                 type: type,
                 url: ajaxurl,
                 success: function (data) {
-                    $('#doctor_id').val(id);
-                    if(Object.keys(data.appointments).length>0){
-                        $('#doctor_id').val(id);
-                        $('#DoctorsTimeTable').append($('<thead>',{
-                            id: 'thead',
-                            class: 'sticky-md-top'
-                        }));
-                        $('#thead').css("background-color", "white");
-                        $('#thead').append($('<tr>', {
-                            id: 'trh'
-                        }));
+                    $("#doctor_id").val(id);
+                    if (Object.keys(data.appointments).length > 0) {
+                        $("#DoctorsTimeTable").append(
+                            $("<thead>", {
+                                id: "thead",
+                                class: "sticky-md-top",
+                            })
+                        );
+                        $("#thead").css("background-color", "white");
+                        $("#thead").append(
+                            $("<tr>", {
+                                id: "trh",
+                            })
+                        );
 
-                        Object.keys(data.appointments).forEach(item => {
-                            $('#trh').append($('<td>', {
-                            }).html(item));
-                        })
+                        Object.keys(data.appointments).forEach((item) => {
+                            $("#trh").append($("<td>", {}).html(item));
+                        });
 
-                        $('#DoctorsTimeTable').append($('<tbody>',{
-                            id: 'tbody'
-                        }));
-                        for (let i = 0; i < data.count; i++){
-                            $('#tbody').append($('<tr>',{
-                                id: 'tr'+i
-                            }));
-                            Object.keys(data.appointments).forEach(key =>{
-                                if(data.appointments[key][i]){
-                                    let button = $('<button>',{
+                        $("#DoctorsTimeTable").append(
+                            $("<tbody>", {
+                                id: "tbody",
+                            })
+                        );
+                        for (let i = 0; i < data.count; i++) {
+                            $("#tbody").append(
+                                $("<tr>", {
+                                    id: "tr" + i,
+                                })
+                            );
+                            Object.keys(data.appointments).forEach((key) => {
+                                if (data.appointments[key][i]) {
+                                    let button = $("<button>", {
                                         id: data.appointments[key][i].id,
-                                        class: data.appointments[key][i].user_id ? "btn btn-danger availableTd" : "btn btn-light availableTd",
-                                        disabled: data.appointments[key][i].user_id ? true : false,
-                                    }).text(data.appointments[key][i].time).click(tdIsChecked);
+                                        class: data.appointments[key][i].user_id
+                                            ? "btn btn-danger availableTd"
+                                            : "btn btn-light availableTd",
+                                        disabled: data.appointments[key][i]
+                                            .user_id
+                                            ? true
+                                            : false,
+                                    })
+                                        .text(data.appointments[key][i].time)
+                                        .click(tdIsChecked);
 
-                                    let td = $('<td>',{
-                                    });
+                                    let td = $("<td>", {});
 
                                     td.append(button);
 
-                                    $('#tr'+ i).append(td);
+                                    $("#tr" + i).append(td);
+                                } else {
+                                    $("#tr" + i).append($("<td>", {}));
                                 }
-                                else {
-                                    $('#tr'+ i).append($('<td>',{
-                                    }));
-                                }
-                            })
+                            });
                         }
-                    }
-                    else {
-                        $('#TableHelp').text('Расписание не заполнено');
+                    } else {
+                        $("#TableHelp").text("Расписание не заполнено");
                     }
                 },
                 error: function (data) {
@@ -124,21 +133,21 @@ $(document).ready(function () {
         }
     }
 
-    function tdIsChecked(e){
+    function tdIsChecked(e) {
         e.preventDefault();
-        var id = $('.btn-info').attr('id');
-        $('#'+id).removeClass('btn-info');
-        $('#'+id).attr("class","btn btn-light");
-        $('#'+e.target.id).removeClass('btn-light');
-        $('#'+e.target.id).attr("class","btn btn-info");
-        $("#appointmentId").val($('#'+e.target.id).attr('id'));
-        $('#AppointmentIdHelp').text('');
+        var id = $(".btn-info").attr("id");
+        $("#" + id).removeClass("btn-info");
+        $("#" + id).attr("class", "btn btn-light");
+        $("#" + e.target.id).removeClass("btn-light");
+        $("#" + e.target.id).attr("class", "btn btn-info");
+        $("#appointmentId").val($("#" + e.target.id).attr("id"));
+        $("#AppointmentIdHelp").text("");
     }
 
-    var all_tds = document.querySelectorAll('.availableTd');
-    all_tds.forEach(el=>{
-        el.addEventListener('click', tdIsChecked);
-    })
+    var all_tds = document.querySelectorAll(".availableTd");
+    all_tds.forEach((el) => {
+        el.addEventListener("click", tdIsChecked);
+    });
 
     $("#SpecialitySelection").change(getDoctors);
     $("#DoctorSelection").change(getAppointments);
