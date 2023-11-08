@@ -4,22 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DBCreateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\DoctorController;
 
 Route::middleware("auth")->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
+    Route::get('/show_from_doctors_page/{id}', [AppointmentController::class, 'show_from_doctors_page'])->name('from_doctors_page');
 });
 
 Route::middleware("guest")->group(function () {
@@ -34,3 +26,4 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
+Route::get('/doctors', [DoctorController::class, 'show'])->name('doctors');

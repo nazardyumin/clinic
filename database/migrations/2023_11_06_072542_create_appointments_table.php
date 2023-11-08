@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+
     public function up(): void
     {
         Schema::create('appointments', function (Blueprint $table) {
@@ -21,23 +19,24 @@ return new class extends Migration
             $table->string('day_off_status')->nullable();
             $table->timestamps();
         });
-        //$now = date("Y-m-d H:i:s");
-        $tomorrow_start = mktime(8, 0, 0, date("m"), date("d") + 1, date("Y"));
-        $tomorrow_end = mktime(14, 0, 0, date("m"), date("d") + 1, date("Y"));
-        $date1 = new DateTime(date("Y-m-d H:i:s", $tomorrow_start));
-        $date2 = new DateTime(date("Y-m-d H:i:s", $tomorrow_end));
 
-        for (; $date1 <= $date2; $date1->modify('+20 minutes')) {
+        //$tomorrow = new DateTime(date("Y")."-".date("m")."-".date("d"), new DateTimeZone('Europe/Moscow'));
+        //$tomorrow_end = new DateTime(date("Y")."-".date("m")."-".date("d"), new DateTimeZone('Europe/Moscow'));
+
+        $tomorrow_start = new DateTime(date("Y") . "-" . date("m") . "-" . date("d"), new DateTimeZone('Etc/GMT-5'));
+        $tomorrow_end = new DateTime(date("Y") . "-" . date("m") . "-" . date("d"), new DateTimeZone('Etc/GMT-5'));
+
+        $tomorrow_start->modify("+1 day 8 hours");
+        $tomorrow_end->modify("+1 day 14 hours");
+
+        for (; $tomorrow_start->getTimestamp() <= $tomorrow_end->getTimestamp(); $tomorrow_start->modify('+20 minutes')) {
             Appointment::create([
                 'doctor_id' => 1,
-                'date' => $date1->getTimestamp()
+                'date' => $tomorrow_start->getTimestamp()
             ]);
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('appointments');

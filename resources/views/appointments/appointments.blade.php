@@ -3,7 +3,7 @@
 @section('extra')
 
 
-<div class="container my-5">
+<div class="container" style="margin-top: 100px">
     <h3>Запись на прием</h3>
     <form>
         <div class="mb-3 mt-3">
@@ -26,10 +26,7 @@
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
         </div> --}}
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Записаться</button>
     </form>
 </div>
-
-
-
 @endsection

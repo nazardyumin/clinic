@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
@@ -17,9 +18,9 @@ class Doctor extends Model
         'speciality_id'
     ];
 
-    public function speciality(): HasOne
+    public function speciality():BelongsTo
     {
-        return $this->hasOne(Speciality::class);
+        return $this->belongsTo(Speciality::class);
     }
 
     public function appointments(): HasMany

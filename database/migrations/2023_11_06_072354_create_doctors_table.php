@@ -21,23 +21,23 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        $list_names = array('Иванов Сергей Михайлович', 'Петрова Анна Павловна');
+        $F_male = array("Иванов", "Петров", "Сидоров", "Михайлов", "Павлов", "Сергеев");
+        $I_male = array("Андрей", "Станислав", "Алексей", "Степан", "Виктор", "Владимир");
+        $O_male = array("Филиппович", "Денисович", "Олегович", "Петрович", "Антонович", "Владимирович");
+
+        $F_fem = array("Жукова", "Долгова", "Зайцева", "Волкова", "Шишкина", "Медведева");
+        $I_fem = array("Анна", "Надежда", "Ирина", "Екатерина", "Наталья", "Светлана");
+        $O_fem = array("Леонидовна", "Валерьевна", "Вячеславовна", "Борисовна", "Дмитриевна", "Георгиевна");
 
         for ($i = 1; $i <= 10; $i++) {
-            $male_photo = 'storage/images/doc_male.jpg';
-            $female_photo = 'storage/images/doc_female.jpg';
-            if ($i % 2 == 0) {
-                $male_photo = 'storage/images/doc_male1.jpg';
-                $female_photo = 'storage/images/doc_female1.jpg';
-            }
             Doctor::create([
-                'name' => $list_names[0],
-                'photo' => $male_photo,
+                'name' => $F_male[rand(0,5)]." ".$I_male[rand(0,5)]." ".$O_male[rand(0,5)],
+                'photo' => 'storage/images/male'.$i.'.jpg',
                 'speciality_id' => $i
             ]);
             Doctor::create([
-                'name' => $list_names[1],
-                'photo' => $female_photo,
+                'name' => $F_fem[rand(0,5)]." ".$I_fem[rand(0,5)]." ".$O_fem[rand(0,5)],
+                'photo' => 'storage/images/female'.$i.'.jpg',
                 'speciality_id' => $i
             ]);
         }

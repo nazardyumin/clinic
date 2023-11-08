@@ -2,7 +2,7 @@
 
 @section('content')
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <nav class="navbar navbar-expand-md fixed-top navbar-light bg-light">
             <div class="container-fluid mx-3">
                 <a class="navbar-brand" href="{{route('home')}}">
                     <img src="{{ asset('storage/images/logo.png') }}" alt="logo" height="50">
@@ -18,14 +18,13 @@
                             <a class="nav-link" aria-current="page" href="#">О нас</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Специалисты</a>
+                            <a class="nav-link {{ request()->routeIs('doctors') ? 'active' : '' }}" href="{{ route('doctors') }}">Специалисты</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Отзывы</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('appointments') ? 'active' : '' }}"
-                                href="{{ route('appointments') }}">Записаться на прием</a>
+                            <a class="nav-link {{ request()->routeIs('appointments') ? 'active' : '' }}" href="{{ route('appointments') }}">Записаться на прием</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Администратор</a>
@@ -73,7 +72,7 @@
         </nav>
     </header>
 
-    <div class="container-fluid">
+    <div class="container-fluid" style="margin-top: 75px">
         @yield('extra')
     </div>
 @endsection

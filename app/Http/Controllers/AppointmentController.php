@@ -17,6 +17,13 @@ class AppointmentController extends Controller
         return view('appointments.appointments', compact('specialities'));
     }
 
+    public function show_from_doctors_page(string $id)
+    {
+        $doctor = Doctor::find($id);
+        session(['doctor' => $doctor]);
+        return redirect(route('appointments'));
+    }
+
     public function get_doctors(string $id)
     {
         $doctors = Doctor::where('speciality_id', $id)->get();
@@ -28,7 +35,7 @@ class AppointmentController extends Controller
         $timeZone = Auth::getUser()->timezone;
         $current_date = new DateTime("now", new DateTimeZone($timeZone));
         $current_date->modify("+15 minutes");
-
+        //$testdate = new DateTime(date("Y-m-d H:i:s", 1699430400), new DateTimeZone($timeZone));
         $doc = Doctor::find($id);
         $appointments = $doc->appointments;
         $filtered_appointments = $appointments->where('date', '>', $current_date->getTimestamp());
