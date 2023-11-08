@@ -11,7 +11,7 @@ Route::middleware("auth")->group(function () {
     Route::get('/appointments', [AppointmentController::class, 'show'])->name('appointments');
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
-    Route::get('/show_from_doctors_page/{id}', [AppointmentController::class, 'show_from_doctors_page'])->name('from_doctors_page');
+    Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
 });
 
 Route::middleware("guest")->group(function () {

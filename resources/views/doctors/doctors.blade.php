@@ -13,7 +13,7 @@
                             @endphp
                             <h5 class="card-title">{{ $doctor->name }}</h5>
                             <p class="card-text">{{ $speciality->speciality }}</p>
-                            <a class="btn btn-secondary" href="{{ route('from_doctors_page', $doctor->id) }}">Записаться на
+                            <a class="btn btn-secondary" href="{{ route('redirect_from_doctors_page', $doctor->id) }}">Записаться на
                                 прием</a>
                         </div>
                     </div>

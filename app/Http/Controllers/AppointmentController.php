@@ -11,16 +11,22 @@ use DateTimeZone;
 
 class AppointmentController extends Controller
 {
-    public function show()
+    public function show(string $id = null)
     {
         $specialities = Speciality::all();
         return view('appointments.appointments', compact('specialities'));
     }
 
-    public function show_from_doctors_page(string $id)
+    public function redirect_from_doctors_page(string $id)
     {
         $doctor = Doctor::find($id);
-        session(['doctor' => $doctor]);
+        $doctors = Doctor::where('speciality_id','=',$doctor->speciality_id)->get();
+        $timeZone = Auth::getUser()->timezone;
+        $current_date = new DateTime("now", new DateTimeZone($timeZone));
+        $current_date->modify("+15 minutes");
+        $appointments = $doctor->appointments;
+        $filtered_appointments = $appointments->where('date', '>', $current_date->getTimestamp());
+        session(['doctor' => $doctor, 'doctors'=> $doctors, 'appointments'=>$filtered_appointments]);
         return redirect(route('appointments'));
     }
 
