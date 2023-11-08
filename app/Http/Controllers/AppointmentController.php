@@ -44,8 +44,9 @@ class AppointmentController extends Controller
         return response()->json(['appointments' => $response['appointments'], 'count' => $response['count']]);
     }
 
-    public function save_appointment(Request $request){
-        if($request->appointment_id){
+    public function save_appointment(Request $request)
+    {
+        if ($request->appointment_id) {
             //TODO add model, controller, save appointment to DB!!!
             return redirect(route('home'));
         }
