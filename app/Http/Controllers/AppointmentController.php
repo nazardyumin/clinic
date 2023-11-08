@@ -37,6 +37,7 @@ class AppointmentController extends Controller
 
     public function save_appointment(Request $request){
         if($request->appointment_id){
+            //TODO add model, controller, save appointment to DB!!!
             return redirect(route('home'));
         }
         $response = AppointmentHelper::get_doctor_appointments($request->doctor_id);
