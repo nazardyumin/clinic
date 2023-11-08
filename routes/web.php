@@ -12,6 +12,7 @@ Route::middleware("auth")->group(function () {
     Route::get('/get_doctors/{id}', [AppointmentController::class, 'get_doctors'])->name('get_doctors');
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
+    Route::get('/redirect_from_ajax/{id}', [AppointmentController::class, 'redirect_from_ajax'])->name('redirect_from_ajax');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
 });
 

@@ -23,6 +23,15 @@ class AppointmentController extends Controller
         return redirect(route('appointments'));
     }
 
+    // public function redirect_from_ajax(string $id)
+    // {
+    //     $response = AppointmentHelper::get_doctor_appointments($id);
+    //     $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
+    //     $specialities = Speciality::all();
+    //     session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
+    //     return view('appointments.appointments', compact('specialities'));
+    // }
+
     public function get_doctors(string $id)
     {
         $doctors = Doctor::where('speciality_id', $id)->get();
@@ -31,7 +40,7 @@ class AppointmentController extends Controller
 
     public function get_appointments(string $id)
     {
-        $response = AppointmentHelper::get_doctor_appointments($id)['appointments'];
+        $response = AppointmentHelper::get_doctor_appointments($id);
         return response()->json(['appointments' => $response['appointments'], 'count' => $response['count']]);
     }
 

@@ -18,7 +18,11 @@ class AppointmentHelper
         $doctor = Doctor::find($id);
         $appointments = $doctor->appointments;
         $filtered = $appointments->where('date', '>', $current_date->getTimestamp())->where('day_off','!=','true')->sortBy('date');
-        date_default_timezone_set($timeZone);
+        $appointments_to_view = [];
+        $count = 0;
+        if(count($filtered)>0)
+        {
+            date_default_timezone_set($timeZone);
         $n = date('n', $filtered[0]->date);
         $j = date('j', $filtered[0]->date);
         $w = date('w', $filtered[0]->date);
@@ -45,6 +49,8 @@ class AppointmentHelper
                 $count = count($value);
             }
         }
+        }
+
         return ['doctor' => $doctor, 'appointments' => $appointments_to_view, 'count' => $count];
     }
 }

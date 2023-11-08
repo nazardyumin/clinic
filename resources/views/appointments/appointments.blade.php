@@ -57,7 +57,7 @@
                             session()->forget('doctor');
                         @endphp
                     @else
-                        <input id="doctor_id" type="hidden" name="doctor_id"">
+                        <input id="doctor_id" type="hidden" name="doctor_id">
                     @endif
 
                     <input id="appointmentId" type="hidden" name="appointment_id">
@@ -69,8 +69,9 @@
                 </form>
 
             </div>
-            <div class="col-9 overflow-auto" style="height: 85vh;">
+            <div class="col-9 overflow-auto" style="height: 75vh;">
                 <div class="mb-3">
+                    <h4 id="TableHelp" class="form-text text-danger"></h4>
                     <table id="DoctorsTimeTable" class="table table-sm">
                         @if (session()->has('appointments') && session()->has('count'))
                             @php
