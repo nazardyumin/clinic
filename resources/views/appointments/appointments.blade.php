@@ -1,10 +1,10 @@
 @extends('nav.nav')
 
 @section('extra')
-
     <div class="container" style="margin-top: 100px">
         <h3>Запись на прием</h3>
-        <form>
+        <form method="POST" action="{{route('save_appointment')}}">
+            @csrf
             <div class="mb-3 mt-3">
                 <label for="SpecialitySelection" class="form-label">Выберите специалиста</label>
                 <select id="SpecialitySelection" class="form-select" aria-label="Speciality selection">
@@ -12,7 +12,6 @@
                         @php
                             $doctor = session('doctor');
                             $spec = $doctor->speciality;
-                            session()->forget('doctor');
                         @endphp
                         <option value="0">-- Не выбран --</option>
                         @foreach ($specialities as $speciality)
@@ -39,18 +38,68 @@
                             session()->forget('doctors');
                         @endphp
                         @foreach ($doctors as $doc)
-                            <option value="{{ $doc->id }}"
-                            {{ $doc->id == $doctor->id ? 'selected' : '' }}>
-                            {{ $doc->name }}</option>
+                            <option value="{{ $doc->id }}" {{ $doc->id == $doctor->id ? 'selected' : '' }}>
+                                {{ $doc->name }}</option>
                         @endforeach
                     @endif
                 </select>
                 <div id="DoctorSelectionHelp" class="form-text text-danger"></div>
             </div>
+            @error('appointment_id')
+                <div id="AppointmentIdHelp" class="form-text text-danger">{{$message}}</div>
+            @enderror
+
+            <div class="mb-3">
+                <table id="DoctorsTimeTable" class="table">
+                    @if (session()->has('appointments') && session()->has('count'))
+                        @php
+                            $appointments = session('appointments');
+                            $count = session('count');
+                            session()->forget('appointments', 'count');
+                        @endphp
+                        <thead>
+                            <tr>
+                                @foreach ($appointments as $key => $value)
+                                    <td>{{ $key }}</td>
+                                @endforeach
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for ($i = 0; $i < $count; $i++)
+                                <tr>
+                                    @foreach ($appointments as $key => $value)
+                                        @if (array_key_exists($i, $value))
+                                            <td>
+                                                <button
+                                                    id={{$value[$i]['id']}} class='btn {{ $value[$i]['user_id'] ? ' btn-danger' : 'btn-light' }} availableTd'
+                                                    {{ $value[$i]['user_id'] ? 'disabled' : '' }}>{{ $value[$i]['time'] }}
+                                                </button>
+                                            </td>
+                                        @else
+                                            <td></td>
+                                        @endif
+                                    @endforeach
+                                </tr>
+                            @endfor
+                        </tbody>
+                    @endif
+                </table>
+            </div>
+
             {{-- <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> --}}
+            @if (session()->has('doctor'))
+                <input type="hidden" name="doctor_id" value="{{session('doctor')->id}}">
+                @php
+                    session()->forget('doctor');
+                @endphp
+            @else
+                <input id="doctor_id" type="hidden" name="doctor_id"">
+            @endif
+
+            <input id="appointmentId" type="hidden" name="appointment_id">
             <button type="submit" class="btn btn-primary">Записаться</button>
         </form>
     </div>

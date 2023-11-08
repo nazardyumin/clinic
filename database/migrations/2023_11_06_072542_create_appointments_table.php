@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(Doctor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('date');
-            $table->string('day_off_status')->nullable();
+            $table->boolean('day_off')->default(false);            ;
             $table->timestamps();
         });
 
@@ -29,12 +29,39 @@ return new class extends Migration
         $tomorrow_start->modify("+1 day 8 hours");
         $tomorrow_end->modify("+1 day 14 hours");
 
-        for (; $tomorrow_start->getTimestamp() <= $tomorrow_end->getTimestamp(); $tomorrow_start->modify('+20 minutes')) {
+        do
+        {
             Appointment::create([
                 'doctor_id' => 1,
                 'date' => $tomorrow_start->getTimestamp()
             ]);
-        }
+            $tomorrow_start->modify('+20 minutes');
+        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
+
+
+        $tomorrow_start->modify("+22 hours");
+        $tomorrow_end->modify("+1 day 2 hours");
+
+        do
+        {
+            Appointment::create([
+                'doctor_id' => 1,
+                'date' => $tomorrow_start->getTimestamp()
+            ]);
+            $tomorrow_start->modify('+20 minutes');
+        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
+
+        $tomorrow_start->modify("+18 hours");
+        $tomorrow_end->modify("+22 hours");
+
+        do
+        {
+            Appointment::create([
+                'doctor_id' => 1,
+                'date' => $tomorrow_start->getTimestamp()
+            ]);
+            $tomorrow_start->modify('+20 minutes');
+        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
     }
 
     public function down(): void
