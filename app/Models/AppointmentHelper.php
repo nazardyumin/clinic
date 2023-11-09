@@ -14,9 +14,8 @@ class AppointmentHelper
 
         date_default_timezone_set($timeZone);
 
-        $current_date = strtotime(date('now'));
+        $current_date = strtotime('now');
         $current_date = strtotime('+15 minutes', $current_date);
-
 
         $doctor = Doctor::find($id);
         $appointments = $doctor->appointments;

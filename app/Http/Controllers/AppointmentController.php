@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Doctor;
 use App\Models\Speciality;
 use App\Models\AppointmentHelper;
+use Illuminate\Support\Facades\Auth;
 
 class AppointmentController extends Controller
 {
@@ -38,13 +40,13 @@ class AppointmentController extends Controller
     public function save_appointment(Request $request)
     {
         if ($request->appointment_id && $request->doctor_id) {
-            //TODO add model, controller, save appointment to DB!!!
+            $upd = Appointment::find($request->appointment_id);
+            $upd->user_id = Auth::id();
+            $upd->save();
             return redirect(route('home'));
-        }
-        else if(!$request->doctor_id) {
+        } else if (!$request->doctor_id) {
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран"]);
-        }
-        else {
+        } else {
             $response = AppointmentHelper::get_doctor_appointments($request->doctor_id);
             $doctors = Doctor::where('speciality_id', '=', $response['doctor']->speciality_id)->get();
             session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
