@@ -43,6 +43,7 @@ class AppointmentController extends Controller
             $upd = Appointment::find($request->appointment_id);
             $upd->user_id = Auth::id();
             $upd->save();
+            //TODO Add Account page to redirect to
             return redirect(route('home'));
         } else if (!$request->doctor_id) {
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран"]);

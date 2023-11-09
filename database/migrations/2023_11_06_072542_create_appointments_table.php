@@ -27,8 +27,8 @@ return new class extends Migration
         $month = date('m');
         $day = date('d');
 
-        $start = strtotime(date($year.'-'.$month.'-'.$day.' 08:00')); //сегодня 08:00
-        $end = strtotime('+8 hours', $start); //сегодня 16:00
+        $start = strtotime(date($year.'-'.$month.'-'.$day.' 14:00')); //сегодня 14:00
+        $end = strtotime('+7 hours', $start); //сегодня 21:00
 
         do
         {
@@ -39,8 +39,8 @@ return new class extends Migration
             $start = strtotime('+20 minutes', $start);
         }while($start<$end);
 
-        $start = strtotime('+22 hours', $start); //завтра 14:00
-        $end = strtotime('+1 day 4 hours', $end); //завтра 20:00
+        $start = strtotime('+17 hours', $start); //завтра 14:00
+        $end = strtotime('+23 hours', $end); //завтра 20:00
 
         do
         {

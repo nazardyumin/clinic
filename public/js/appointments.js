@@ -3,6 +3,7 @@ $(document).ready(function () {
         $("#DoctorsTimeTable").empty();
         $("#AppointmentIdHelp").text("");
         $("#TableHelp").text("");
+        $("#DoctorSelectionHelp").removeClass("text-danger");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -57,7 +58,7 @@ $(document).ready(function () {
         e.preventDefault();
         var id = $("#DoctorSelection").val();
         if (parseInt(id) > 0) {
-            $("#DoctorSelectionHelp").text("");
+            $("#DoctorSelectionHelp").removeClass("text-danger");
             var type = "GET";
             var ajaxurl =
                 "http://localhost/clinic/public/index.php/get_appointments/" +
@@ -106,7 +107,7 @@ $(document).ready(function () {
                                     let button = $("<button>", {
                                         id: data.appointments[key][i].id,
                                         class: data.appointments[key][i].user_id
-                                            ? "btn btn-danger availableTd"
+                                            ? "btn btn-danger"
                                             : "btn btn-light availableTd",
                                         disabled: data.appointments[key][i]
                                             .user_id
@@ -135,14 +136,15 @@ $(document).ready(function () {
                 },
             });
         } else {
-            $("#DoctorSelectionHelp").text("Врач не выбран");
+            $("#doctor_id").val("");
+            $("#DoctorSelectionHelp").attr("class", "text-danger");
         }
     }
 
     function tdIsChecked(e) {
         e.preventDefault();
         var id = $(".btn-info").attr("id");
-        $("#" + id).removeClass("btn-info");
+        $("#" + id).removeClass("btn btn-info");
         $("#" + id).attr("class", "btn btn-light");
         $("#" + e.target.id).removeClass("btn-light");
         $("#" + e.target.id).attr("class", "btn btn-info");

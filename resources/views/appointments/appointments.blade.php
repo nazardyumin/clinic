@@ -39,13 +39,14 @@
                                     $doctors = session('doctors');
                                     session()->forget('doctors');
                                 @endphp
+                                <option value="0">-- Не выбран --</option>
                                 @foreach ($doctors as $doc)
                                     <option value="{{ $doc->id }}" {{ $doc->id == $doctor->id ? 'selected' : '' }}>
                                         {{ $doc->name }}</option>
                                 @endforeach
                             @endif
                         </select>
-                        <div id="DoctorSelectionHelp" class="form-text text-danger"></div>
+                        <div id="DoctorSelectionHelp" class="form-text" style="color:white">Врач не выбран</div>
                     </div>
                     {{-- <div class="mb-3 form-check">
                     <input type="checkbox" class="form-check-input" id="exampleCheck1">
