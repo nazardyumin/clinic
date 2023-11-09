@@ -71,7 +71,15 @@
             </div>
             <div class="col-9 overflow-auto" style="height: 75vh;">
                 <div class="mb-3">
-                    <h4 id="TableHelp" class="form-text text-danger"></h4>
+                    @if (session()->has('appointments') && session()->has('count'))
+                        @if (session('count') == 0)
+                            <h4 id="TableHelp" class="form-text text-danger">Расписание не заполнено</h4>
+                        @else
+                            <h4 id="TableHelp" class="form-text text-danger"></h4>
+                        @endif
+                    @else
+                        <h4 id="TableHelp" class="form-text text-danger"></h4>
+                    @endif
                     <table id="DoctorsTimeTable" class="table table-sm">
                         @if (session()->has('appointments') && session()->has('count'))
                             @php
@@ -82,7 +90,7 @@
                             <thead class="sticky-md-top" style="background-color: white">
                                 <tr>
                                     @foreach ($appointments as $key => $value)
-                                        <td>{{ $key }}</td>
+                                        <td>{{ mb_substr($key, mb_strpos($key, '|') + 1) }}</td>
                                     @endforeach
                                 </tr>
                             </thead>

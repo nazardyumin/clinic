@@ -60,11 +60,13 @@ $(document).ready(function () {
             $("#DoctorSelectionHelp").text("");
             var type = "GET";
             var ajaxurl =
-                "http://localhost/clinic/public/index.php/get_appointments/" + id;
+                "http://localhost/clinic/public/index.php/get_appointments/" +
+                id;
             $.ajax({
                 type: type,
                 url: ajaxurl,
                 success: function (data) {
+                    //console.log(data);
                     $("#doctor_id").val(id);
                     if (Object.keys(data.appointments).length > 0) {
                         $("#DoctorsTimeTable").append(
@@ -81,7 +83,11 @@ $(document).ready(function () {
                         );
 
                         Object.keys(data.appointments).forEach((item) => {
-                            $("#trh").append($("<td>", {}).html(item));
+                            $("#trh").append(
+                                $("<td>", {}).html(
+                                    item.substring(item.indexOf("|") + 1)
+                                )
+                            );
                         });
 
                         $("#DoctorsTimeTable").append(

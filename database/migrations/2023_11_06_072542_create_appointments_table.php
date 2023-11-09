@@ -16,52 +16,53 @@ return new class extends Migration
             $table->foreignIdFor(Doctor::class)->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->unsignedBigInteger('date');
-            $table->boolean('day_off')->default(false);            ;
+            $table->boolean('day_off')->default(false);
             $table->timestamps();
         });
 
-        //$tomorrow = new DateTime(date("Y")."-".date("m")."-".date("d"), new DateTimeZone('Europe/Moscow'));
-        //$tomorrow_end = new DateTime(date("Y")."-".date("m")."-".date("d"), new DateTimeZone('Europe/Moscow'));
+        //date_default_timezone_set('Europe/Moscow');
+        date_default_timezone_set('Etc/GMT-5');
 
-        $tomorrow_start = new DateTime(date("Y") . "-" . date("m") . "-" . date("d"), new DateTimeZone('Etc/GMT-5'));
-        $tomorrow_end = new DateTime(date("Y") . "-" . date("m") . "-" . date("d"), new DateTimeZone('Etc/GMT-5'));
+        $year = date('Y');
+        $month = date('m');
+        $day = date('d');
 
-        $tomorrow_start->modify("+1 day 8 hours");
-        $tomorrow_end->modify("+1 day 14 hours");
-
-        do
-        {
-            Appointment::create([
-                'doctor_id' => 1,
-                'date' => $tomorrow_start->getTimestamp()
-            ]);
-            $tomorrow_start->modify('+20 minutes');
-        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
-
-
-        $tomorrow_start->modify("+22 hours");
-        $tomorrow_end->modify("+1 day 2 hours");
+        $start = strtotime(date($year.'-'.$month.'-'.$day.' 08:00')); //сегодня 08:00
+        $end = strtotime('+8 hours', $start); //сегодня 16:00
 
         do
         {
             Appointment::create([
                 'doctor_id' => 1,
-                'date' => $tomorrow_start->getTimestamp()
+                'date' => $start
             ]);
-            $tomorrow_start->modify('+20 minutes');
-        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
+            $start = strtotime('+20 minutes', $start);
+        }while($start<$end);
 
-        $tomorrow_start->modify("+18 hours");
-        $tomorrow_end->modify("+22 hours");
+        $start = strtotime('+22 hours', $start); //завтра 14:00
+        $end = strtotime('+1 day 4 hours', $end); //завтра 20:00
 
         do
         {
             Appointment::create([
                 'doctor_id' => 1,
-                'date' => $tomorrow_start->getTimestamp()
+                'date' => $start
             ]);
-            $tomorrow_start->modify('+20 minutes');
-        }while($tomorrow_start->getTimestamp() < $tomorrow_end->getTimestamp());
+            $start = strtotime('+20 minutes', $start);
+        }while($start<$end);
+
+        $start = strtotime('+16 hours', $start); //послезавтра 12:00
+        $end = strtotime('+22 hours', $end); //послезавтра 18:00
+
+        do
+        {
+            Appointment::create([
+                'doctor_id' => 1,
+                'date' => $start
+            ]);
+            $start = strtotime('+20 minutes', $start);
+        }while($start<$end);
+
     }
 
     public function down(): void
