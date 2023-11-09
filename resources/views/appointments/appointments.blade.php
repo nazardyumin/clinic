@@ -52,7 +52,7 @@
                     <label class="form-check-label" for="exampleCheck1">Check me out</label>
                     </div> --}}
                     @if (session()->has('doctor'))
-                        <input type="hidden" name="doctor_id" value="{{ session('doctor')->id }}">
+                        <input id="doctor_id" type="hidden" name="doctor_id" value="{{ session('doctor')->id }}">
                         @php
                             session()->forget('doctor');
                         @endphp
