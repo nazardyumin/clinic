@@ -4,6 +4,7 @@ $(document).ready(function () {
         $("#AppointmentIdHelp").text("");
         $("#TableHelp").text("");
         $("#DoctorSelectionHelp").removeClass("text-danger");
+        $("#appointmentId").val("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -50,6 +51,7 @@ $(document).ready(function () {
         $("#DoctorsTimeTable").empty();
         $("#AppointmentIdHelp").text("");
         $("#TableHelp").text("");
+        $("#appointmentId").val("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
