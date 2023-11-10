@@ -40,7 +40,7 @@ class AppointmentHelper
                     $key_count++;
                     $key_memory = $day_key;
                 }
-                $key_concat = $key_count . '|' . $day_key;
+                $key_concat = ($key_count < 10 ? '0' . $key_count : $key_count) . '|' . $day_key;
                 $appointments_to_view[$key_concat][] = ['id' => $item->id, 'user_id' => $item->user_id, 'time' => date('H:i', $item->date), 'day_off' => $item->day_off];
             }
 
