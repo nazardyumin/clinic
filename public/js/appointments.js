@@ -1,7 +1,7 @@
 $(document).ready(function () {
     function getDoctors(e) {
         $("#DoctorsTimeTable").empty();
-        $("#AppointmentIdHelp").text("");
+        $("#SubmitHelp").text("");
         $("#TableHelp").text("");
         $("#DoctorSelectionHelp").removeClass("text-danger");
         $("#appointmentId").val("");
@@ -49,7 +49,7 @@ $(document).ready(function () {
 
     function getAppointments(e) {
         $("#DoctorsTimeTable").empty();
-        $("#AppointmentIdHelp").text("");
+        $("#SubmitHelp").text("");
         $("#TableHelp").text("");
         $("#appointmentId").val("");
         $.ajaxSetup({
@@ -151,7 +151,7 @@ $(document).ready(function () {
         $("#" + e.target.id).removeClass("btn-light");
         $("#" + e.target.id).attr("class", "btn btn-info");
         $("#appointmentId").val($("#" + e.target.id).attr("id"));
-        $("#AppointmentIdHelp").text("");
+        $("#SubmitHelp").text("");
     }
 
     var all_tds = document.querySelectorAll(".availableTd");

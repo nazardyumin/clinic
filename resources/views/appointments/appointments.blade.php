@@ -65,7 +65,7 @@
                     <button type="submit" class="btn btn-secondary">Записаться</button>
 
                     @error('appointment_id')
-                        <div id="AppointmentIdHelp" class="form-text text-danger">{{ $message }}</div>
+                        <div id="SubmitHelp" class="form-text text-danger">{{ $message }}</div>
                     @enderror
                 </form>
 
