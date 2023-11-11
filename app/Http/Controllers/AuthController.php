@@ -31,7 +31,8 @@ class AuthController extends Controller
             "name" => $data["name"],
             "email" => $data["email"],
             "password" => bcrypt($data["password"]),
-            "timezone" => $data["timezone"]
+            "timezone" => $data["timezone"],
+            "role_id" => 2
         ]);
 
         if ($user) {

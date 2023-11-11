@@ -28,9 +28,13 @@
                             <a class="nav-link {{ request()->routeIs('appointments') ? 'active' : '' }}"
                                 href="{{ route('appointments') }}">Записаться на прием</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Администратор</a>
-                        </li>
+                        @auth('web')
+                            @if (Auth::user()->role_id == 1)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Администратор</a>
+                                </li>
+                            @endif
+                        @endauth
                         {{-- <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
@@ -57,7 +61,6 @@
                                     <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
                                 </ul>
                             </div>
-                            {{-- <a href="{{route('logout')}}" class="btn btn-outline-success" >Выйти</a> --}}
                         @endauth
 
                         @guest
@@ -65,10 +68,6 @@
                         @endguest
 
                     </div>
-
-                    {{-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> --}}
-                    {{-- <button class="btn btn-outline-success" type="submit">Войти</button> --}}
-
                 </div>
             </div>
         </nav>
