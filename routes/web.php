@@ -5,6 +5,7 @@ use App\Http\Controllers\DBCreateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\AdminController;
 
 Route::middleware("auth")->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -13,6 +14,9 @@ Route::middleware("auth")->group(function () {
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
+    Route::get('/admin/speciality', [AdminController::class, 'add_speciality'])->name('admin.speciality');
+    Route::get('/admin/doctor', [AdminController::class, 'add_doctor'])->name('admin.doctor');
+    Route::get('/admin/timetable', [AdminController::class, 'add_timetable'])->name('admin.timetable');
 });
 
 Route::middleware("guest")->group(function () {

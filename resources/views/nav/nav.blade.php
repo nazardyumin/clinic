@@ -30,8 +30,13 @@
                         </li>
                         @auth('web')
                             @if (Auth::user()->role_id == 1)
+                                @php
+                                    $active = "";
+                                    if(request()->routeIs('admin.speciality') || request()->routeIs('admin.doctor') || request()->routeIs('admin.timetable'))
+                                    $active = "active";
+                                @endphp
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Администратор</a>
+                                    <a class="nav-link {{$active}}" href="{{ route('admin.speciality') }}">Администратор</a>
                                 </li>
                             @endif
                         @endauth
@@ -57,7 +62,9 @@
                                     {{ Auth::user()->name }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    <li><a class="dropdown-item" href="#">Личный кабинет</a></li>
+                                    @if (Auth::user()->role_id == 2)
+                                        <li><a class="dropdown-item" href="#">Личный кабинет</a></li>
+                                    @endif
                                     <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
                                 </ul>
                             </div>
