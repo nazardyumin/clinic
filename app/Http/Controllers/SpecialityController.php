@@ -2,38 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Speciality;
 use Illuminate\Http\Request;
+use App\Models\Speciality;
 
-class AdminController extends Controller
+class SpecialityController extends Controller
 {
-    public function show_speciality_form()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return view('admin.admin-add-speciality');
+        return view('admin.admin_specialities');
     }
 
-    public function show_doctor_form()
-    {
-        return view('admin.admin-add-doctor');
-    }
-
-    public function show_timetable_form()
-    {
-        return view('admin.admin-add-timetable');
-    }
-
-    public function add_speciality(Request $request)
-    {
-        $data = $request->validate([
-            "speciality" => ["required", "string", "unique:specialities,speciality"]
-        ]);
-
-        Speciality::create([
-            "speciality" => $data["speciality"]
-        ]);
-
-        return redirect(route('admin.speciality'))->withErrors(['success'=>'Специалист успешно добавлен']);
-    }
     /**
      * Show the form for creating a new resource.
      */
@@ -47,7 +28,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            "speciality" => ["required", "string", "unique:specialities,speciality"]
+        ]);
+
+        Speciality::create([
+            "speciality" => $data["speciality"]
+        ]);
+
+        return redirect(route('speciality.index'))->withErrors(['success'=>'Специалист успешно добавлен']);
     }
 
     /**

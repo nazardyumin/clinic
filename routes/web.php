@@ -5,7 +5,8 @@ use App\Http\Controllers\DBCreateController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TimetableController;
+use App\Http\Controllers\SpecialityController;
 
 Route::middleware("auth")->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -14,9 +15,9 @@ Route::middleware("auth")->group(function () {
     Route::get('/get_appointments/{id}', [AppointmentController::class, 'get_appointments'])->name('get_appointments');
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
-    Route::get('/admin/speciality', [AdminController::class, 'add_speciality'])->name('admin.speciality');
-    Route::get('/admin/doctor', [AdminController::class, 'add_doctor'])->name('admin.doctor');
-    Route::get('/admin/timetable', [AdminController::class, 'add_timetable'])->name('admin.timetable');
+    Route::resource('/admin/speciality', SpecialityController::class);
+    Route::resource('/admin/doctor', DoctorController::class);
+    Route::resource('/admin/timetable', TimetableController::class);
 });
 
 Route::middleware("guest")->group(function () {
@@ -31,4 +32,4 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
-Route::get('/doctors', [DoctorController::class, 'show'])->name('doctors');
+Route::get('/doctors', [DoctorController::class, 'show_doctors'])->name('doctors');

@@ -32,11 +32,11 @@
                             @if (Auth::user()->role_id == 1)
                                 @php
                                     $active = "";
-                                    if(request()->routeIs('admin.speciality') || request()->routeIs('admin.doctor') || request()->routeIs('admin.timetable'))
+                                    if(request()->routeIs('speciality.*') || request()->routeIs('doctor.*') || request()->routeIs('timetable.*'))
                                     $active = "active";
                                 @endphp
                                 <li class="nav-item">
-                                    <a class="nav-link {{$active}}" href="{{ route('admin.speciality') }}">Администратор</a>
+                                    <a class="nav-link {{$active}}" href="{{ route('speciality.index') }}">Администратор</a>
                                 </li>
                             @endif
                         @endauth
