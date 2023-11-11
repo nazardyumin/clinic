@@ -15,16 +15,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('timezone');
+            $table->string('timezone')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-
-        User::create([
-            'name' => 'Назар',
-            'email' => 'nazar@php.ru',
-            'password' => bcrypt(123)
-        ]);
     }
 
     public function down(): void
