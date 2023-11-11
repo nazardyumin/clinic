@@ -7,25 +7,17 @@ use App\Models\Speciality;
 
 class SpecialityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('admin.admin_specialities');
+        $specialities = Speciality::all();
+        return view('admin.admin_specialities', compact('specialities'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return redirect(route('home'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -36,38 +28,36 @@ class SpecialityController extends Controller
             "speciality" => $data["speciality"]
         ]);
 
-        return redirect(route('speciality.index'))->withErrors(['success'=>'Специалист успешно добавлен']);
+        return redirect(route('speciality.index'))->withErrors(['success' => 'Специалист успешно добавлен']);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->validate([
+            "speciality" => ["required", "string"]
+        ]);
+        $speciality = Speciality::find($id);
+        $speciality->speciality = $data['speciality'];
+        $speciality->save();
+        $specialities = Speciality::all();
+        return response()->json(['specialities' => $specialities]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $speciality = Speciality::find($id);
+        $speciality->delete();
+        $specialities = Speciality::all();
+        return response()->json(['specialities' => $specialities]);
     }
 }

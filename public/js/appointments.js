@@ -69,7 +69,6 @@ $(document).ready(function () {
                 type: type,
                 url: ajaxurl,
                 success: function (data) {
-                    //console.log(data);
                     $("#doctor_id").val(id);
                     if (Object.keys(data.appointments).length > 0) {
                         $("#DoctorsTimeTable").append(
