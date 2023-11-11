@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('doctors', function (Blueprint $table) {
@@ -31,21 +28,18 @@ return new class extends Migration
 
         for ($i = 1; $i <= 10; $i++) {
             Doctor::create([
-                'name' => $F_male[rand(0,5)]." ".$I_male[rand(0,5)]." ".$O_male[rand(0,5)],
+                'name' => $F_male[rand(0,count($F_male)-1)]." ".$I_male[rand(0,count($I_male)-1)]." ".$O_male[rand(0,count($O_male)-1)],
                 'photo' => 'storage/images/male'.$i.'.jpg',
                 'speciality_id' => $i
             ]);
             Doctor::create([
-                'name' => $F_fem[rand(0,5)]." ".$I_fem[rand(0,5)]." ".$O_fem[rand(0,5)],
+                'name' => $F_fem[rand(0,count($F_fem)-1)]." ".$I_fem[rand(0,count($I_fem)-1)]." ".$O_fem[rand(0,count($O_fem)-1)],
                 'photo' => 'storage/images/female'.$i.'.jpg',
                 'speciality_id' => $i
             ]);
         }
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('doctors');
