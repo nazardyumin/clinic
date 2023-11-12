@@ -3,7 +3,7 @@
 @section('extra')
     <div class="container-fluid- mx-5" style="margin-top: 100px">
         <div class="row">
-            <div class="col-8">
+            <div class="col-12">
                 @auth('web')
                     @php
                         $timeZone = Auth::getUser()->timezone;
