@@ -50,6 +50,5 @@ Route::get('/about', function () {
 Route::get('/comments', [CommentController::class, 'show'])->name('comments');
 Route::post('/comments', [CommentController::class, 'add'])->name('comments.add');
 
-
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
 Route::get('/doctors', [DoctorController::class, 'show_doctors'])->name('doctors');
