@@ -15,14 +15,16 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">О нас</a>
+                            <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}"
+                                href="{{ route('about') }}">О нас</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('doctors') ? 'active' : '' }}"
                                 href="{{ route('doctors') }}">Специалисты</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Отзывы</a>
+                            <a class="nav-link {{ request()->routeIs('comments') ? 'active' : '' }}"
+                                href="{{ route('comments') }}">Отзывы</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('appointments') ? 'active' : '' }}"
@@ -31,12 +33,14 @@
                         @auth('web')
                             @if (Auth::user()->role_id == 1)
                                 @php
-                                    $active = "";
-                                    if(request()->routeIs('speciality.*') || request()->routeIs('doctor.*') || request()->routeIs('timetable.*'))
-                                    $active = "active";
+                                    $active = '';
+                                    if (request()->routeIs('speciality.*') || request()->routeIs('doctor.*') || request()->routeIs('timetable.*')) {
+                                        $active = 'active';
+                                    }
                                 @endphp
                                 <li class="nav-item">
-                                    <a class="nav-link {{$active}}" href="{{ route('speciality.index') }}">Администратор</a>
+                                    <a class="nav-link {{ $active }}"
+                                        href="{{ route('speciality.index') }}">Администратор</a>
                                 </li>
                             @endif
                         @endauth
@@ -49,7 +53,7 @@
                                     {{ Auth::user()->name }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    <li><a class="dropdown-item" href="{{route('account')}}">Личный кабинет</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
                                     <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
                                 </ul>
                             </div>

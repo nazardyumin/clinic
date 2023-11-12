@@ -7,6 +7,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\TimetableController;
 use App\Http\Controllers\SpecialityController;
+use App\Http\Controllers\CommentController;
 
 Route::middleware("auth")->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -28,7 +29,6 @@ Route::middleware("auth")->group(function () {
     Route::post('/admin/doctor', [DoctorController::class, 'store'])->name('doctor.store');
     Route::get('/admin/delete_doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
     Route::post('/admin/update_doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
-
     Route::resource('/admin/timetable', TimetableController::class);
 });
 
@@ -46,6 +46,10 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('home.about');
 })->name('about');
+
+Route::get('/comments', [CommentController::class, 'show'])->name('comments');
+Route::post('/comments', [CommentController::class, 'add'])->name('comments.add');
+
 
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
 Route::get('/doctors', [DoctorController::class, 'show_doctors'])->name('doctors');

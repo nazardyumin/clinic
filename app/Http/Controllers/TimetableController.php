@@ -45,12 +45,12 @@ class TimetableController extends Controller
 
     public function create()
     {
-        //
+        return redirect(route('home'));
     }
 
     public function store(Request $request)
     {
-        if ($request->doctor_id>0 && $request->date) {
+        if ($request->doctor_id > 0 && $request->date) {
             $timeZone = Auth::getUser()->timezone;
             date_default_timezone_set($timeZone);
 
@@ -76,21 +76,21 @@ class TimetableController extends Controller
 
     public function show(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
     public function edit(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
     public function destroy(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 }

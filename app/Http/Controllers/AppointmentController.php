@@ -56,14 +56,14 @@ class AppointmentController extends Controller
 
     public function show_user_appointments()
     {
-        $appointments = Appointment::where('user_id', Auth::id())->get();
+        $appointments = Appointment::where('user_id', Auth::id())->get()->sortBy('date');
         return view('account.account', compact('appointments'));
     }
 
     public function delete_user_appointment(string $id)
     {
         $app = Appointment::find($id);
-        $app->user_id=null;
+        $app->user_id = null;
         $app->save();
         return redirect(route('account'));
     }
