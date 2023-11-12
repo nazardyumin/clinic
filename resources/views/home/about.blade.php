@@ -3,7 +3,7 @@
 @section('extra')
     <div class="row">
         <div class="col-8">
-            <img class="img-fluid " src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
+            <img class="img-fluid rounded-pill " src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
         </div>
         <div class="col-3">
             <img class="img-fluid " src="{{ asset('storage/images/logo.png') }}" alt="doctors">

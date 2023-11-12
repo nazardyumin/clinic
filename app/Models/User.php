@@ -46,8 +46,14 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function role():BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function getAppointmentsCount(): int
+    {
+        $app = Appointment::where('user_id', $this->id)->get();
+        return count($app);
     }
 }

@@ -51,6 +51,10 @@
                                 <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown"
                                     data-bs-display="static" aria-expanded="false">
                                     {{ Auth::user()->name }}
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                        {{ Auth::getUser()->getAppointmentsCount() }}
+                                    </span>
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
                                     <li><a class="dropdown-item" href="{{ route('account') }}">Личный кабинет</a></li>
