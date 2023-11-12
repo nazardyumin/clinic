@@ -60,6 +60,7 @@ $(document).ready(function () {
                     tr.append(td1, td2, td3);
                     $("#SpecTable").append(tr);
                 });
+                alert("Удалено успешно");
             },
         });
     }
@@ -128,6 +129,7 @@ $(document).ready(function () {
                         tr.append(td1, td2, td3);
                         $("#SpecTable").append(tr);
                     });
+                    alert("Отредактировано успешно");
                 },
             });
         } else {
