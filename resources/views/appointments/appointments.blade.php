@@ -102,7 +102,7 @@
                                             @if (array_key_exists($i, $value))
                                                 <td>
                                                     <button id={{ $value[$i]['id'] }}
-                                                        class='btn {{ $value[$i]['user_id'] ? ' btn-danger' : 'btn-light' }} availableTd'
+                                                        class='btn {{ $value[$i]['user_id'] ? ' btn-danger' : 'btn-light availableTd' }}'
                                                         {{ $value[$i]['user_id'] ? 'disabled' : '' }}>{{ $value[$i]['time'] }}
                                                     </button>
                                                 </td>
