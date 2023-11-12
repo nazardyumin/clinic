@@ -16,17 +16,19 @@ Route::middleware("auth")->group(function () {
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
 
-    Route::get('/admin/speciality', [SpecialityController::class,'index'])->name('speciality.index');
-    Route::post('/admin/speciality', [SpecialityController::class,'store'])->name('speciality.store');
-    Route::get('/admin/delete_speciality/{id}', [SpecialityController::class,'destroy'])->name('speciality.destroy');
-    Route::post('/admin/update_speciality/{id}', [SpecialityController::class,'update'])->name('speciality.update');
+    Route::get('/account', [AppointmentController::class, 'show_user_appointments'])->name('account');
+    Route::get('/delete_appointment/{id}', [AppointmentController::class, 'delete_user_appointment'])->name('delete_appointment');
 
-    Route::get('/admin/doctor', [DoctorController::class,'index'])->name('doctor.index');
-    Route::post('/admin/doctor', [DoctorController::class,'store'])->name('doctor.store');
-    Route::get('/admin/delete_doctor/{id}', [DoctorController::class,'destroy'])->name('doctor.destroy');
-    Route::post('/admin/update_doctor/{id}', [DoctorController::class,'update'])->name('doctor.update');
+    Route::get('/admin/speciality', [SpecialityController::class, 'index'])->name('speciality.index');
+    Route::post('/admin/speciality', [SpecialityController::class, 'store'])->name('speciality.store');
+    Route::get('/admin/delete_speciality/{id}', [SpecialityController::class, 'destroy'])->name('speciality.destroy');
+    Route::post('/admin/update_speciality/{id}', [SpecialityController::class, 'update'])->name('speciality.update');
 
-    // Route::resource('/admin/doctor', DoctorController::class);
+    Route::get('/admin/doctor', [DoctorController::class, 'index'])->name('doctor.index');
+    Route::post('/admin/doctor', [DoctorController::class, 'store'])->name('doctor.store');
+    Route::get('/admin/delete_doctor/{id}', [DoctorController::class, 'destroy'])->name('doctor.destroy');
+    Route::post('/admin/update_doctor/{id}', [DoctorController::class, 'update'])->name('doctor.update');
+
     Route::resource('/admin/timetable', TimetableController::class);
 });
 
@@ -40,6 +42,10 @@ Route::middleware("guest")->group(function () {
 Route::get('/', function () {
     return redirect(route('home'));
 });
+
+Route::get('/about', function () {
+    return view('home.about');
+})->name('about');
 
 Route::get('/home', [DBCreateController::class, 'create_db'])->name('home');
 Route::get('/doctors', [DoctorController::class, 'show_doctors'])->name('doctors');

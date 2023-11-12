@@ -43,8 +43,7 @@ class AppointmentController extends Controller
             $upd = Appointment::find($request->appointment_id);
             $upd->user_id = Auth::id();
             $upd->save();
-            //TODO Add Account page to redirect to
-            return redirect(route('home'));
+            return redirect(route('account'));
         } else if (!$request->doctor_id) {
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Врач не выбран"]);
         } else {
@@ -53,5 +52,19 @@ class AppointmentController extends Controller
             session(['doctor' => $response['doctor'], 'doctors' => $doctors, 'appointments' => $response['appointments'], 'count' => $response['count']]);
             return redirect(route('appointments'))->withErrors(["appointment_id" => "Не выбрано время для записи"]);
         }
+    }
+
+    public function show_user_appointments()
+    {
+        $appointments = Appointment::where('user_id', Auth::id())->get();
+        return view('account.account', compact('appointments'));
+    }
+
+    public function delete_user_appointment(string $id)
+    {
+        $app = Appointment::find($id);
+        $app->user_id=null;
+        $app->save();
+        return redirect(route('account'));
     }
 }

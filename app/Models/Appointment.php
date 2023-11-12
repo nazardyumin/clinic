@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Appointment extends Model
@@ -15,4 +16,9 @@ class Appointment extends Model
         'date',
         'day_off_status'
     ];
+
+    public function doctor():BelongsTo
+    {
+        return $this->belongsTo(Doctor::class);
+    }
 }

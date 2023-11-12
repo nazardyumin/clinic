@@ -15,7 +15,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">О нас</a>
+                            <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">О нас</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {{ request()->routeIs('doctors') ? 'active' : '' }}"
@@ -40,19 +40,6 @@
                                 </li>
                             @endif
                         @endauth
-                        {{-- <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li> --}}
-
                     </ul>
                     <div class="d-flex">
                         @auth('web')
@@ -62,9 +49,7 @@
                                     {{ Auth::user()->name }}
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-lg-end">
-                                    @if (Auth::user()->role_id == 2)
-                                        <li><a class="dropdown-item" href="#">Личный кабинет</a></li>
-                                    @endif
+                                    <li><a class="dropdown-item" href="{{route('account')}}">Личный кабинет</a></li>
                                     <li><a class="dropdown-item" href="{{ route('logout') }}">Выйти</a></li>
                                 </ul>
                             </div>
