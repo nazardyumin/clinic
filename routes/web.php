@@ -16,13 +16,17 @@ Route::middleware("auth")->group(function () {
     Route::get('/redirect_from_doctors_page/{id}', [AppointmentController::class, 'redirect_from_doctors_page'])->name('redirect_from_doctors_page');
     Route::post('/save_appointment', [AppointmentController::class, 'save_appointment'])->name('save_appointment');
 
-    //Route::resource('/admin/speciality', SpecialityController::class);
     Route::get('/admin/speciality', [SpecialityController::class,'index'])->name('speciality.index');
     Route::post('/admin/speciality', [SpecialityController::class,'store'])->name('speciality.store');
     Route::get('/admin/delete_speciality/{id}', [SpecialityController::class,'destroy'])->name('speciality.destroy');
     Route::post('/admin/update_speciality/{id}', [SpecialityController::class,'update'])->name('speciality.update');
 
-    Route::resource('/admin/doctor', DoctorController::class);
+    Route::get('/admin/doctor', [DoctorController::class,'index'])->name('doctor.index');
+    Route::post('/admin/doctor', [DoctorController::class,'store'])->name('doctor.store');
+    Route::get('/admin/delete_doctor/{id}', [DoctorController::class,'destroy'])->name('doctor.destroy');
+    Route::post('/admin/update_doctor/{id}', [DoctorController::class,'update'])->name('doctor.update');
+
+    // Route::resource('/admin/doctor', DoctorController::class);
     Route::resource('/admin/timetable', TimetableController::class);
 });
 
