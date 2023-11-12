@@ -24,7 +24,7 @@ class DoctorController extends Controller
 
     public function create()
     {
-        //
+        return redirect(route('home'));
     }
 
     public function store(Request $request)
@@ -48,12 +48,12 @@ class DoctorController extends Controller
 
     public function show(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
     public function edit(string $id)
     {
-        //
+        return redirect(route('home'));
     }
 
     public function update(Request $request, string $id)
@@ -88,8 +88,6 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::find($id);
         $doctor->delete();
-        // $specialities = Speciality::all();
-        // $doctors = Doctor::all();
         return response()->json(['status' => 'OK']);
     }
 }
