@@ -60,7 +60,6 @@ $(document).ready(function () {
                     tr.append(td1, td2, td3);
                     $("#SpecTable").append(tr);
                 });
-                alert("Специалист с ID: " + id + " успешно удален");
             },
         });
     }
@@ -129,7 +128,6 @@ $(document).ready(function () {
                         tr.append(td1, td2, td3);
                         $("#SpecTable").append(tr);
                     });
-                    alert("Специалист с ID: " + id + " успешно отредактирован");
                 },
             });
         } else {
