@@ -51,27 +51,45 @@ class DoctorController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $doctor = Doctor::find($id);
+        if ($request->has('photo')) {
+            $data = $request->validate([
+                "name" => ["required", "string"],
+                "speciality_id" => ["numeric"],
+                "photo" => ["required", "image", "dimensions:min_width=1500,min_height=1000,max_width=1500,max_height=1000"]
+            ]);
+            Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
+            $photo = Storage::disk('public')->put('images', $data['photo']);
+            $doctor->photo = "storage/" . $photo;
+            $doctor->name = $data['name'];
+            $doctor->speciality_id = $data['speciality_id'];
+            $doctor->save();
+            return response()->json(['status' => 'OK']);
+        } else {
+            $data = $request->validate([
+                "name" => ["required", "string"],
+                "speciality_id" => ["numeric"]
+            ]);
+            $doctor->name = $data['name'];
+            $doctor->speciality_id = $data['speciality_id'];
+            $doctor->save();
+            return response()->json(['status' => 'OK']);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        $doctor = Doctor::find($id);
+        $doctor->delete();
+        // $specialities = Speciality::all();
+        // $doctors = Doctor::all();
+        return response()->json(['status' => 'OK']);
     }
 }

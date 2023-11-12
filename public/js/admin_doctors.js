@@ -2,14 +2,15 @@ $(document).ready(function () {
     function deleteDoctor(e) {
         $("#DoctorSuccessHelp").text("");
         $("#DoctorErrorHelp").text("");
+        $("#PhotoErrorHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
-        var id = e.target.id;
-        let imgedit = $("#imgedit" + id).attr("src");
-        let imgdelete = $("#imgdelete" + id).attr("src");
+        var id = e.target.id.includes("imgdelete")
+            ? e.target.id.replace("imgdelete", "")
+            : e.target.id;
         var ajaxurl =
             "http://localhost/clinic/public/index.php/admin/delete_doctor/" +
             id;
@@ -17,57 +18,15 @@ $(document).ready(function () {
             type: "GET",
             url: ajaxurl,
             success: function (data) {
-                $("#DocTable").empty();
-                data.doctors.forEach((el) => {
-
-                    //TODO
-                    
-                    let tr = $("<tr>");
-                    let td1 = $("<td>").append(
-                        $("<input>", {
-                            id: "input-" + el.id,
-                            type: "text",
-                            class: "form-control",
-                            value: el.speciality,
-                        })
-                    );
-
-                    let td2 = $("<td>").append(
-                        $("<button>", {
-                            id: "edit-" + el.id,
-                            class: "btn btn-secondary SpecEdit",
-                        })
-                            .click(editSpeciality)
-                            .append(
-                                $("<img>", {
-                                    src: imgedit,
-                                    id: "imgedit" + el.id,
-                                })
-                            )
-                    );
-                    let td3 = $("<td>").append(
-                        $("<button>", {
-                            id: el.id,
-                            class: "btn btn-danger SpecDelete",
-                        })
-                            .click(deleteSpeciality)
-                            .append(
-                                $("<img>", {
-                                    src: imgdelete,
-                                    id: "imgdelete" + el.id,
-                                })
-                            )
-                    );
-                    tr.append(td1, td2, td3);
-                    $("#SpecTable").append(tr);
-                });
+                $("#tr" + id).remove();
             },
         });
     }
 
-    function editSpeciality(e) {
-        $("#SpecialitySuccessHelp").text("");
-        $("#SpecialityErrorHelp").text("");
+    function editDoctor(e) {
+        $("#DoctorSuccessHelp").text("");
+        $("#DoctorErrorHelp").text("");
+        $("#PhotoErrorHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -76,63 +35,34 @@ $(document).ready(function () {
         var id = e.target.id.includes("imgedit")
             ? e.target.id.replace("imgedit", "")
             : e.target.id.substring(e.target.id.indexOf("-") + 1);
-        var spec = $("#input-" + id).val();
+        var name = $("#inputdoc-" + id).val();
+        var photo = $("#photodoc-" + id)[0].files[0];
+        var spec = $("#specdoc-" + id).val();
+        var formData = new FormData();
 
-        if (spec.length > 0) {
-            let imgedit = $("#imgedit" + id).attr("src");
-            let imgdelete = $("#imgdelete" + id).attr("src");
+        formData.append("name", name);
+        if (photo) {
+            formData.append("photo", photo);
+        }
+        formData.append("speciality_id", spec);
+
+        if (name.length > 0) {
             var ajaxurl =
-                "http://localhost/clinic/public/index.php/admin/update_speciality/" +
+                "http://localhost/clinic/public/index.php/admin/update_doctor/" +
                 id;
             $.ajax({
                 type: "POST",
                 url: ajaxurl,
-                data: { speciality: spec },
+                contentType: false,
+                processData: false,
+                data: formData,
+                dataType: "json",
                 success: function (data) {
-                    $("#SpecTable").empty();
-                    data.specialities.forEach((el) => {
-                        let tr = $("<tr>");
-                        let td1 = $("<td>").append(
-                            $("<input>", {
-                                id: "input-" + el.id,
-                                type: "text",
-                                class: "form-control",
-                                value: el.speciality,
-                            })
-                        );
-                        let td2 = $("<td>").append(
-                            $("<button>", {
-                                id: "edit-" + el.id,
-                                class: "btn btn-secondary SpecEdit",
-                            })
-                                .click(editSpeciality)
-                                .append(
-                                    $("<img>", {
-                                        src: imgedit,
-                                        id: "imgedit" + el.id,
-                                    })
-                                )
-                        );
-                        let td3 = $("<td>").append(
-                            $("<button>", {
-                                id: el.id,
-                                class: "btn btn-danger SpecDelete",
-                            })
-                                .click(deleteSpeciality)
-                                .append(
-                                    $("<img>", {
-                                        src: imgdelete,
-                                        id: "imgdelete" + el.id,
-                                    })
-                                )
-                        );
-                        tr.append(td1, td2, td3);
-                        $("#SpecTable").append(tr);
-                    });
+                    $("#photodoc-" + id).val("");
                 },
             });
         } else {
-            $("#input-" + id).css("border-color", "red");
+            $("#inputdoc-" + id).css("border-color", "red");
         }
     }
 

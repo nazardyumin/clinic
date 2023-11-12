@@ -7,7 +7,9 @@ $(document).ready(function () {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
             },
         });
-        var id = e.target.id;
+        var id = e.target.id.includes("imgdelete")
+            ? e.target.id.replace("imgdelete", "")
+            : e.target.id;
         let imgedit = $("#imgedit" + id).attr("src");
         let imgdelete = $("#imgdelete" + id).attr("src");
         var ajaxurl =

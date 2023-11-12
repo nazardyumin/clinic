@@ -9,7 +9,7 @@
                 <div class="mb-3">
                     <label for="InputDoctor" class="form-label">Введите имя врача</label>
                     <input id="InputDoctor" type="text" class="form-control" name="name" aria-describedby="Input Doctor"
-                        required>
+                        required autocomplete="name">
                 </div>
                 <div class="mb-3">
                     <label for="InputSpeciality" class="form-label">Выберите специалиста</label>
@@ -22,7 +22,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="PhotoDoctor" class="form-label">Добавьте фото врача</label>
+                    <label for="PhotoDoctor" class="form-label">Добавьте фото врача (1500х1000)</label>
                     <input id="PhotoDoctor" type="file" class="form-control" aria-describedby="Photo Doctor"
                         accept="image/*" name="photo" required>
                 </div>
@@ -44,16 +44,20 @@
                 <table class="table table-sm">
                     <thead class="sticky-md-top" style="background-color: white">
                         <tr>
+                            <td>ID</td>
                             <td>Врач</td>
                             <td>Специалист</td>
-                            <td>Фото</td>
+                            <td>Фото (1500х1000)</td>
                             <td></td>
                             <td></td>
                         </tr>
                     </thead>
                     <tbody id="DocTable">
                         @foreach ($doctors as $doctor)
-                            <tr>
+                            <tr id="tr{{ $doctor->id }}">
+                                <td>
+                                    <p class="form-text">{{ $doctor->id }}</p>
+                                </td>
                                 <td>
                                     <input id="inputdoc-{{ $doctor->id }}" type="text" class="form-control"
                                         value="{{ $doctor->name }}" required>
@@ -73,14 +77,14 @@
                                         accept="image/*">
                                 </td>
                                 <td>
-                                    <button id="editdoc-{{ $speciality->id }}" class="btn btn-secondary DocEdit">
-                                        <img id="imgedit{{ $speciality->id }}" src="{{ asset('images/edit.png') }}"
+                                    <button id="editdoc-{{ $doctor->id }}" class="btn btn-secondary DocEdit">
+                                        <img id="imgedit{{ $doctor->id }}" src="{{ asset('images/edit.png') }}"
                                             alt="edit">
                                     </button>
                                 </td>
                                 <td>
-                                    <button id="{{ $speciality->id }}" class="btn btn-danger DocDelete">
-                                        <img id="imgdelete{{ $speciality->id }}" src="{{ asset('images/delete.png') }}"
+                                    <button id="{{ $doctor->id }}" class="btn btn-danger DocDelete">
+                                        <img id="imgdelete{{ $doctor->id }}" src="{{ asset('images/delete.png') }}"
                                             alt="delete">
                                     </button>
                                 </td>

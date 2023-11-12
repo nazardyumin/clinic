@@ -33,6 +33,7 @@
     </script>
     <script src="{{ asset('js/appointments.js') }}"></script>
     <script src="{{ asset('js/admin_specialities.js') }}"></script>
+    <script src="{{ asset('js/admin_doctors.js') }}"></script>
 </body>
 
 </html>
