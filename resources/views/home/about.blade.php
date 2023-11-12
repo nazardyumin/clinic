@@ -3,7 +3,7 @@
 @section('extra')
     <div class="row">
         <div class="col-8">
-            <img class="img-fluid rounded-pill " src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
+            <img class="img-fluid rounded-pill" src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
         </div>
         <div class="col-3">
             <img class="img-fluid " src="{{ asset('storage/images/logo.png') }}" alt="doctors">
@@ -20,7 +20,6 @@
             <p class="form-text text-info mt-5">+7(347)286-15-46</p>
             <p class="form-text text-info">г.Уфа, ул.Шафиева, 2</p>
             <p class="form-text text-info">dolgoletie@php.ru</p>
-
         </div>
     </div>
 @endsection

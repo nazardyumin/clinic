@@ -27,42 +27,38 @@ return new class extends Migration
         $month = date('m');
         $day = date('d');
 
-        $start = strtotime(date($year.'-'.$month.'-'.$day.' 14:00')); //сегодня 14:00
+        $start = strtotime(date($year . '-' . $month . '-' . $day . ' 14:00')); //сегодня 14:00
         $end = strtotime('+7 hours', $start); //сегодня 21:00
 
-        do
-        {
+        do {
             Appointment::create([
                 'doctor_id' => 1,
                 'date' => $start
             ]);
             $start = strtotime('+20 minutes', $start);
-        }while($start<$end);
+        } while ($start < $end);
 
         $start = strtotime('+17 hours', $start); //завтра 14:00
         $end = strtotime('+23 hours', $end); //завтра 20:00
 
-        do
-        {
+        do {
             Appointment::create([
                 'doctor_id' => 1,
                 'date' => $start
             ]);
             $start = strtotime('+20 minutes', $start);
-        }while($start<$end);
+        } while ($start < $end);
 
         $start = strtotime('+16 hours', $start); //послезавтра 12:00
         $end = strtotime('+22 hours', $end); //послезавтра 18:00
 
-        do
-        {
+        do {
             Appointment::create([
                 'doctor_id' => 1,
                 'date' => $start
             ]);
             $start = strtotime('+20 minutes', $start);
-        }while($start<$end);
-
+        } while ($start < $end);
     }
 
     public function down(): void

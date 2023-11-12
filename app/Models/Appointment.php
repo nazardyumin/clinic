@@ -17,7 +17,7 @@ class Appointment extends Model
         'day_off_status'
     ];
 
-    public function doctor():BelongsTo
+    public function doctor(): BelongsTo
     {
         return $this->belongsTo(Doctor::class);
     }

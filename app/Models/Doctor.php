@@ -17,7 +17,7 @@ class Doctor extends Model
         'speciality_id'
     ];
 
-    public function speciality():BelongsTo
+    public function speciality(): BelongsTo
     {
         return $this->belongsTo(Speciality::class);
     }

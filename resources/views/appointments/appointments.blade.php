@@ -48,10 +48,6 @@
                         </select>
                         <div id="DoctorSelectionHelp" class="form-text" style="color:white">Врач не выбран</div>
                     </div>
-                    {{-- <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div> --}}
                     @if (session()->has('doctor'))
                         <input id="doctor_id" type="hidden" name="doctor_id" value="{{ session('doctor')->id }}">
                         @php

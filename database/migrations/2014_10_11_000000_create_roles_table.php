@@ -22,7 +22,6 @@ return new class extends Migration
         Role::create([
             'role' => 'patient'
         ]);
-
     }
 
     public function down(): void
