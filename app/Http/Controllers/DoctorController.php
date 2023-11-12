@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Models\Doctor;
 use App\Models\Speciality;
 
@@ -60,11 +61,17 @@ class DoctorController extends Controller
     {
         $doctor = Doctor::find($id);
         if ($request->has('photo')) {
-            $data = $request->validate([
+
+            $data = Validator::make($request->all(), [
                 "name" => ["required", "string"],
                 "speciality_id" => ["numeric"],
                 "photo" => ["required", "image", "dimensions:min_width=1500,min_height=1000,max_width=1500,max_height=1000"]
             ]);
+
+            if ($data->fails()) {
+                return response()->json(['message' => 'Допустимое разрешение фото 1500х1000']);
+            }
+
             Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
             $photo = Storage::disk('public')->put('images', $data['photo']);
             $doctor->photo = "storage/" . $photo;
@@ -87,6 +94,7 @@ class DoctorController extends Controller
     public function destroy(string $id)
     {
         $doctor = Doctor::find($id);
+        Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
         $doctor->delete();
         return response()->json(['status' => 'OK']);
     }

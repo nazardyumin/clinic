@@ -3,6 +3,7 @@ $(document).ready(function () {
         $("#DoctorSuccessHelp").text("");
         $("#DoctorErrorHelp").text("");
         $("#PhotoErrorHelp").text("");
+        $("#AjaxHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -19,6 +20,7 @@ $(document).ready(function () {
             url: ajaxurl,
             success: function (data) {
                 $("#tr" + id).remove();
+                alert("Врач с ID: " + id + " успешно удален");
             },
         });
     }
@@ -27,6 +29,7 @@ $(document).ready(function () {
         $("#DoctorSuccessHelp").text("");
         $("#DoctorErrorHelp").text("");
         $("#PhotoErrorHelp").text("");
+        $("#AjaxHelp").text("");
         $.ajaxSetup({
             headers: {
                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
@@ -58,6 +61,11 @@ $(document).ready(function () {
                 data: formData,
                 dataType: "json",
                 success: function (data) {
+                    if (data.message) {
+                        $("#AjaxHelp").text(data.message);
+                    } else {
+                        alert("Врач с ID: " + id + " успешно отредактирован");
+                    }
                     $("#photodoc-" + id).val("");
                 },
             });

@@ -36,6 +36,7 @@
                 @error('success')
                     <div id="DoctorSuccessHelp" class="form-text text-success mt-3">{{ $message }}</div>
                 @enderror
+                <div id="AjaxHelp" class="form-text text-danger mt-3"></div>
             </form>
         </div>
 
