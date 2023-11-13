@@ -59,6 +59,7 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
                 data: formData,
+                cache: false,
                 dataType: "json",
                 success: function (data) {
                     if (data.message) {

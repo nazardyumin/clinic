@@ -60,6 +60,7 @@ class DoctorController extends Controller
     public function update(Request $request, string $id)
     {
         $doctor = Doctor::find($id);
+
         if ($request->has('photo')) {
 
             $data = Validator::make($request->all(), [
@@ -67,16 +68,14 @@ class DoctorController extends Controller
                 "speciality_id" => ["numeric"],
                 "photo" => ["required", "image", "dimensions:min_width=1500,min_height=1000,max_width=1500,max_height=1000"]
             ]);
-
             if ($data->fails()) {
                 return response()->json(['message' => 'Допустимое разрешение фото 1500х1000']);
             }
-
             Storage::disk('public')->delete(mb_substr($doctor->photo, mb_strpos($doctor->photo, 'storage/') + strlen('storage/')));
-            $photo = Storage::disk('public')->put('images', $data['photo']);
+            $photo = Storage::disk('public')->put('images', $request->photo);
             $doctor->photo = "storage/" . $photo;
-            $doctor->name = $data['name'];
-            $doctor->speciality_id = $data['speciality_id'];
+            $doctor->name = $request->name;
+            $doctor->speciality_id = $request->speciality_id;
             $doctor->save();
             return response()->json(['status' => 'OK']);
         } else {
