@@ -5,7 +5,7 @@
         <div class="col-8">
             <img class="img-fluid rounded-pill" src="{{ asset('storage/images/clinic.jpg') }}" alt="doctors">
         </div>
-        <div class="col-3">
+        <div class="col-3 mt-5">
             <img class="img-fluid " src="{{ asset('storage/images/logo.png') }}" alt="doctors">
             <p>Наша клиника оказывает первичную медико-санитарную, специализированную, в том числе высокотехнологичную
                 медицинскую помощь взрослому и детскому населению планово в рамках Программы государственных гарантий
