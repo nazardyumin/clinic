@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -53,7 +54,10 @@ class User extends Authenticatable
 
     public function getAppointmentsCount(): int
     {
-        $app = Appointment::where('user_id', $this->id)->get();
+        $timeZone = Auth::getUser()->timezone;
+        date_default_timezone_set($timeZone);
+        $current_date = strtotime('now');
+        $app = Appointment::where('user_id', $this->id)->where('date', '>', $current_date)->get();
         return count($app);
     }
 }
