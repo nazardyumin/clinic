@@ -3,10 +3,14 @@ $(document).ready(function () {
     for (let i = 0; i < buttons.length; i++) {
         let date = buttons[i].id.substring(3);
         var appDate = Date.parse(date);
-        console.log(appDate, Date.now());
         if (appDate < Date.now()) {
             buttons[i].disabled = true;
-            document.querySelector("#a" + date).href = "";
+            document.getElementById("a" + date).href = "";
+            document
+                .getElementById("a" + date)
+                .addEventListener("click", function (e) {
+                    e.preventDefault();
+                });
         }
     }
 });
