@@ -42,6 +42,7 @@ $(document).ready(function () {
         let hourFrom = parseInt($("#ChooseHoursFrom").val());
         let minuteFrom = parseInt($("#ChooseMinutesFrom").val());
         let hourTo = parseInt($("#ChooseHoursTo").val());
+        let minuteTo = parseInt($("#ChooseMinutesTo").val());
 
         if (minuteFrom == 59) {
             let newValue = hourFrom + 1;
@@ -49,7 +50,7 @@ $(document).ready(function () {
                 newValue < 10 ? `0${newValue}` : `${newValue}`
             );
             $("#ChooseMinutesTo").val("00");
-        } else if (hourFrom > hourTo) {
+        } else if (hourFrom >= hourTo && minuteTo < minuteFrom) {
             let newValue = minuteFrom + 1;
             $("#ChooseHoursTo").val(
                 hourFrom < 10 ? `0${hourFrom}` : `${hourFrom}`
