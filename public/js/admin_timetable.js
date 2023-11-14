@@ -4,15 +4,18 @@ $(document).ready(function () {
         let hourFrom = parseInt($("#ChooseHoursFrom").val());
         let minuteFrom = parseInt($("#ChooseMinutesFrom").val());
         let hourTo = parseInt($("#ChooseHoursTo").val());
+        let minuteTo = parseInt($("#ChooseMinutesTo").val());
 
         if (hourTo < hourFrom) {
             $("#ChooseHoursTo").val(
                 hourFrom < 10 ? `0${hourFrom}` : `${hourFrom}`
             );
-            let newValue = minuteFrom + 1;
-            $("#ChooseMinutesTo").val(
-                newValue < 10 ? `0${newValue}` : `${newValue}`
-            );
+            if (minuteTo <= minuteFrom) {
+                let newValue = minuteFrom + 1;
+                $("#ChooseMinutesTo").val(
+                    newValue < 10 ? `0${newValue}` : `${newValue}`
+                );
+            }
         }
     }
 
@@ -29,7 +32,7 @@ $(document).ready(function () {
                 newValue < 10 ? `0${newValue}` : `${newValue}`
             );
             $("#ChooseMinutesTo").val("00");
-        } else if (hourFrom == hourTo && minuteTo < minuteFrom) {
+        } else if (hourFrom == hourTo && minuteTo <= minuteFrom) {
             let newValue = minuteFrom + 1;
             $("#ChooseMinutesTo").val(
                 newValue < 10 ? `0${newValue}` : `${newValue}`
