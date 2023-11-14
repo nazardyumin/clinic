@@ -2,11 +2,17 @@ $(document).ready(function () {
     function hoursFromHandler(e) {
         e.preventDefault();
         let hourFrom = parseInt($("#ChooseHoursFrom").val());
+        let minuteFrom = parseInt($("#ChooseMinutesFrom").val());
         let hourTo = parseInt($("#ChooseHoursTo").val());
+        let minuteTo = parseInt($("#ChooseMinutesTo").val());
 
         if (hourTo < hourFrom) {
             $("#ChooseHoursTo").val(
                 hourFrom < 10 ? `0${hourFrom}` : `${hourFrom}`
+            );
+            let newValue = minuteFrom + 1;
+            $("#ChooseMinutesTo").val(
+                newValue < 10 ? `0${newValue}` : `${newValue}`
             );
         }
     }
