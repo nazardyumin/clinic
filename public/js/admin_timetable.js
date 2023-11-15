@@ -17,8 +17,8 @@ $(document).ready(function () {
                 );
             }
         }
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     }
 
     function minutesFromHandler(e) {
@@ -40,8 +40,8 @@ $(document).ready(function () {
                 newValue < 10 ? `0${newValue}` : `${newValue}`
             );
         }
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     }
 
     function hoursToHandler(e) {
@@ -70,8 +70,8 @@ $(document).ready(function () {
         if (hourTo == 20) {
             $("#ChooseMinutesTo").val("00");
         }
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     }
 
     function minutesToHandler(e) {
@@ -89,22 +89,22 @@ $(document).ready(function () {
         } else if (hourTo == 20) {
             $("#ChooseMinutesTo").val("00");
         }
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     }
 
     $("#ChooseDoctor").change(function () {
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     });
     $("#ChooseDate").change(function () {
-        $("#imetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     });
 
     $("#ChooseDuration").change(function () {
-        $("#TimetableErrorHelp").val("");
-        $("#TimetableSuccessHelp").val("");
+        $("#TimetableErrorHelp").text("");
+        $("#TimetableSuccessHelp").text("");
     });
 
     $("#ChooseHoursFrom").change(hoursFromHandler);
