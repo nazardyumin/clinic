@@ -17,6 +17,8 @@ $(document).ready(function () {
                 );
             }
         }
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
     }
 
     function minutesFromHandler(e) {
@@ -38,6 +40,8 @@ $(document).ready(function () {
                 newValue < 10 ? `0${newValue}` : `${newValue}`
             );
         }
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
     }
 
     function hoursToHandler(e) {
@@ -66,6 +70,8 @@ $(document).ready(function () {
         if (hourTo == 20) {
             $("#ChooseMinutesTo").val("00");
         }
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
     }
 
     function minutesToHandler(e) {
@@ -83,7 +89,23 @@ $(document).ready(function () {
         } else if (hourTo == 20) {
             $("#ChooseMinutesTo").val("00");
         }
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
     }
+
+    $("#ChooseDoctor").change(function () {
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
+    });
+    $("#ChooseDate").change(function () {
+        $("#imetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
+    });
+
+    $("#ChooseDuration").change(function () {
+        $("#TimetableErrorHelp").val("");
+        $("#TimetableSuccessHelp").val("");
+    });
 
     $("#ChooseHoursFrom").change(hoursFromHandler);
     $("#ChooseMinutesFrom").change(minutesFromHandler);
