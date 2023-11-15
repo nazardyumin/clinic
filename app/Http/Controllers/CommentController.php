@@ -16,7 +16,8 @@ class CommentController extends Controller
 
     public function add(Request $request)
     {
-        $timeZone = Auth::getUser()->timezone;
+
+        $timeZone = Auth::user()->timezone;
         date_default_timezone_set($timeZone);
         $now = strtotime('now');
 
