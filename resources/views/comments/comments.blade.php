@@ -35,7 +35,7 @@
                                 <h5 class="card-title">{{ $comment->user->name }}</h5>
                                 <p class="card-text">{{ $comment->comment }}</p>
                                 <p class="card-text"><small class="text-body-secondary"><em>Добавлен
-                                            {{ date('d-m-Y', $comment->created) }}</em></small></p>
+                                            {{ date('d-m-Y H:i', $comment->date) }}</em></small></p>
                             </div>
                         </div>
                     @endforeach
