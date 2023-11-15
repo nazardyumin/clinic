@@ -47,13 +47,7 @@ $(document).ready(function () {
         let hourTo = parseInt($("#ChooseHoursTo").val());
         let minuteTo = parseInt($("#ChooseMinutesTo").val());
 
-        if (minuteFrom == 59) {
-            let newValue = hourFrom + 1;
-            $("#ChooseHoursTo").val(
-                newValue < 10 ? `0${newValue}` : `${newValue}`
-            );
-            $("#ChooseMinutesTo").val("00");
-        } else if (hourFrom >= hourTo && minuteTo < minuteFrom) {
+        if (hourFrom >= hourTo && minuteTo < minuteFrom) {
             let newValue = minuteFrom + 1;
             $("#ChooseHoursTo").val(
                 hourFrom < 10 ? `0${hourFrom}` : `${hourFrom}`
@@ -61,6 +55,16 @@ $(document).ready(function () {
             $("#ChooseMinutesTo").val(
                 newValue < 10 ? `0${newValue}` : `${newValue}`
             );
+        }
+        if (minuteFrom == 59) {
+            let newValue = hourFrom + 1;
+            $("#ChooseHoursTo").val(
+                newValue < 10 ? `0${newValue}` : `${newValue}`
+            );
+            $("#ChooseMinutesTo").val("00");
+        }
+        if (hourTo == 20) {
+            $("#ChooseMinutesTo").val("00");
         }
     }
 
